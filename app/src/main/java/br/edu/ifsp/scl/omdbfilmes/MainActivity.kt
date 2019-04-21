@@ -6,12 +6,11 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
-import br.edu.ifsp.scl.omdbfilmes.fragments.FragmentInicial
+import br.edu.ifsp.scl.omdbfilmes.Fragments.FragmentInicial
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
-class MainActivity : AppCompatActivity(){
-
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity(){
 
     private fun onNavigationItemSelected(item: MenuItem): Boolean {
         var retorno: Boolean = false
-        when(item.itemId){
+        when (item.itemId) {
             R.id.sairMenuItem -> {
                 finish()
                 retorno = true
@@ -50,16 +49,10 @@ class MainActivity : AppCompatActivity(){
         return retorno
     }
 
-    private fun SetarFragment(fragment: Fragment){
-
-
+    private fun SetarFragment(fragment: Fragment) {
         val fragmentTarget = fragment;
-
-
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer,  fragmentTarget)
+        fragmentTransaction.replace(R.id.fragmentContainer, fragmentTarget)
         fragmentTransaction.commit()
-
-}
-
+    }
 }

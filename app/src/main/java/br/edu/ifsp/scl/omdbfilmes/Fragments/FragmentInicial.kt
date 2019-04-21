@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.omdbfilmes.fragments
+package br.edu.ifsp.scl.omdbfilmes.Fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
