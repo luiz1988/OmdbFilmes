@@ -14,5 +14,5 @@ object Constantes {
     val VERSION_NAME = "1.0"
     const val URL_BASE: String = "http://www.omdbapi.com"
     val OMDB_API_KEY: String = "f976c781"
-    val APP_KEY_FIELD = "app_key"
+    val APP_KEY_FIELD = "apikey"
 }

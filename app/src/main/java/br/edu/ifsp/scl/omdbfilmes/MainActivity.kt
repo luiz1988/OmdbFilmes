@@ -6,8 +6,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import br.edu.ifsp.scl.omdbfilmes.Fragments.FragmentInicial
+import br.edu.ifsp.scl.omdbfilmes.Retrofit.OmdbFilmes
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_inicial.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +30,7 @@ class MainActivity : AppCompatActivity() {
                 menuLateralDrawerLayout,
                 toolbar,
                 R.string.menu_aberto,
+
                 R.string.menu_fechado
             )
         menuLateralDrawerLayout.addDrawerListener(abreFechaToogle)
@@ -35,24 +41,31 @@ class MainActivity : AppCompatActivity() {
 
         SetarFragment(FragmentInicial())
 
+        ImageView(this).loadPicasso("poster")
+
     }
 
     private fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var retorno: Boolean = false
-        when (item.itemId) {
+        val retorno = when (item.itemId) {
             R.id.sairMenuItem -> {
                 finish()
-                retorno = true
+                true
             }
+            else -> false
         }
         menuLateralDrawerLayout.closeDrawer(GravityCompat.START)
         return retorno
     }
 
     private fun SetarFragment(fragment: Fragment) {
-        val fragmentTarget = fragment;
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragmentTarget)
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
     }
+
+
+}
+
+fun ImageView.loadPicasso(url: String) {
+    Picasso.get().load(url).into(this)
 }

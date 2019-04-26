@@ -14,7 +14,7 @@
             android:textSize="25sp"
             android:gravity="center"
             android:textStyle="bold"
-            />
+    />
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +35,6 @@
                 android:hint="Nome do Filme"
                 android:inputType="text"
                 android:textColorHint="@color/colorAccent"/>
-        />
     </android.support.design.widget.TextInputLayout>
 
     <Button android:id="@+id/btnBuscar"

@@ -5,7 +5,9 @@ import br.edu.ifsp.scl.omdbfilmes.Model.Constantes
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.APP_KEY_FIELD
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.OMDB_API_KEY
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.URL_BASE
+import br.edu.ifsp.scl.omdbfilmes.Model.Teste
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.frame_main.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -16,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class OmdbFilmes(val mainActivity: MainActivity) {
 
@@ -32,8 +35,9 @@ class OmdbFilmes(val mainActivity: MainActivity) {
                 // Resgatando requisição interceptada
                 val reqInterceptada: Request = chain.request()
                 // Criando nova requisição a partir da interceptada e adicionando campos de cabeçalho
+                val url = reqInterceptada.url().newBuilder().addQueryParameter(APP_KEY_FIELD, OMDB_API_KEY).build()
                 val novaReq: Request = reqInterceptada.newBuilder()
-                    .header(APP_KEY_FIELD, OMDB_API_KEY)
+                    .url(url)
                     .method(reqInterceptada.method(), reqInterceptada.body())
                     .build()
                 // retornando a nova requisição preenchdia
@@ -44,7 +48,9 @@ class OmdbFilmes(val mainActivity: MainActivity) {
 
     // Novo objeto Retrofit usando a URL base e o HttpClient com interceptador
     val retrofit: Retrofit =
-        Retrofit.Builder().baseUrl(URL_BASE).client(okHttpClientBuilder.build()).build()
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(URL_BASE).client(okHttpClientBuilder.build()).build()
 
 
     // Cria um objeto, a partir da Interface Retrofit, que contém as funções de requisição
@@ -53,33 +59,22 @@ class OmdbFilmes(val mainActivity: MainActivity) {
     fun pesquisarFilme(titulo: String) {
         /*Chama a função de requisição definida na Interface passando os parâmetros escolhidos pelo usuário e
         enfileira a requisição que recebe um objeto de uma implementação anônima de Callback<ResponseBody>*/
-        var resultado = omdbFilmesApi.getPopularFilme(titulo)
-       /* omdbFilmesApi.getPopularFilme(titulo).enqueue(
-            object : Callback<Response<OmdbMovieResponse>> {
-                // Função chamada no caso de erro
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    *//*mainActivity.mainLl.snackbar("Erro na resposta - Retrofit")*//*
+
+
+        omdbFilmesApi.getPopularFilme(titulo).enqueue(
+            object: Callback<Teste> {
+                override fun onFailure(call: Call<Teste>, t: Throwable) {
+                   mainActivity.mainLl.snackbar("Erro: " + t.message);
                 }
 
-                // Função chamada no caso de resposta
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    try {
-                        // Cria um objeto Gson que consegue fazer reflexão de um Json para Data Class
-                        val gson: Gson = Gson()
-                        // Reflete a resposta (que é um Json) num objeto da classe Resposta
-                       *//* val resposta: Resposta = gson.fromJson(response.body()?.string(), Resposta::class.java)*//*
-                        // StringBuffer para armazenar o resultado das traduções
-                        var traduzidoSb = StringBuffer()
-                        // Parseando o objeto e adicionando as traduções ao StringBuffer O(N^5)
-
-
-                    } catch (jse: JSONException) {
-                       *//* mainActivity.mainLl.snackbar("Erro na resposta - Retrofit")*//*
-                    }
+                override fun onResponse(call: Call<Teste>, response: Response<Teste>) {
+                    print(response.body())
                 }
+
             } // Fim da classe anônima
-        ) // Fim dos parâmetros de enqueue*/
+        ) // Fim dos parâmetros de enqueue
     } // Fim da função traduzir
 
 
 }
+
