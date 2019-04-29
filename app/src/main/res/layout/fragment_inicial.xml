@@ -46,4 +46,17 @@
             android:layout_margin="10dp"
     />
 
+    <!--<TextView
+            android:id="@+id/result_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />-->
+
+    <ImageView
+            android:id="@+id/ImageMovie"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerInside"
+    />
+
 </LinearLayout>

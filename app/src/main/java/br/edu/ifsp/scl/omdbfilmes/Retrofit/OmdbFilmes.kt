@@ -1,19 +1,20 @@
 package br.edu.ifsp.scl.omdbfilmes.Retrofit
 
+import android.support.v4.app.Fragment
+import android.view.View
+import android.widget.ImageView
 import br.edu.ifsp.scl.omdbfilmes.MainActivity
-import br.edu.ifsp.scl.omdbfilmes.Model.Constantes
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.APP_KEY_FIELD
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.OMDB_API_KEY
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.URL_BASE
 import br.edu.ifsp.scl.omdbfilmes.Model.Teste
-import com.google.gson.Gson
+import br.edu.ifsp.scl.omdbfilmes.loadPicasso
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.frame_main.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.ResponseBody
 import org.jetbrains.anko.design.snackbar
-import org.json.JSONException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +27,8 @@ class OmdbFilmes(val mainActivity: MainActivity) {
     //    val retrofit: Retrofit =Retrofit Retrofit.Builder().baseUrl(URL_BASE).build()
 
     val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
+
+    var callback: MovieCallback? = null
 
     // Instanciando o cliente HTTP
     init {
@@ -62,18 +65,31 @@ class OmdbFilmes(val mainActivity: MainActivity) {
 
 
         omdbFilmesApi.getPopularFilme(titulo).enqueue(
-            object: Callback<Teste> {
+            object : Callback<Teste> {
                 override fun onFailure(call: Call<Teste>, t: Throwable) {
-                   mainActivity.mainLl.snackbar("Erro: " + t.message);
+                    mainActivity.mainLl.snackbar("Erro: " + t.message);
                 }
 
                 override fun onResponse(call: Call<Teste>, response: Response<Teste>) {
-                    print(response.body())
+                    val body = response.body()
+                    if (body != null) {
+                        callback?.onResponse(body)
+                    }
                 }
 
             } // Fim da classe anônima
         ) // Fim dos parâmetros de enqueue
     } // Fim da função traduzir
+
+    fun ImageView.loadPicasso(url: String) {
+        Picasso.get().load(url).into(this)
+    }
+
+
+    interface MovieCallback {
+
+        fun onResponse(obj: Teste)
+    }
 
 
 }
