@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         SetarFragment(FragmentInicial())
 
-        ImageView(this).loadPicasso("poster")
+       /* ImageView(this).loadPicasso("poster")*/
 
     }
 

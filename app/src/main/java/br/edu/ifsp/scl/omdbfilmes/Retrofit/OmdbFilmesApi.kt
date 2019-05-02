@@ -1,12 +1,9 @@
 package br.edu.ifsp.scl.omdbfilmes.Retrofit
 
-import br.edu.ifsp.scl.omdbfilmes.Model.Teste
+import br.edu.ifsp.scl.omdbfilmes.Model.MovieOMDB
 import com.google.gson.annotations.SerializedName
-import kotlinx.coroutines.Deferred
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 class OmdbMovie {
@@ -78,6 +75,6 @@ data class OmdbMovieResponse(
 interface OmdbFilmesApi {
 
     @GET("/") //summary: Returns the most popular match for a given title
-    fun getPopularFilme(@Query("t") titulo: String): Call<Teste>
+    fun getPopularFilme(@Query("t") titulo: String): Call<MovieOMDB>
 // Outras funções de requisição poderiam ser colocadas aqui inclusive para outros métodos.
 }

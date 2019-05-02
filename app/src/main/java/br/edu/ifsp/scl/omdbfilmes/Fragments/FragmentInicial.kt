@@ -5,17 +5,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import br.edu.ifsp.scl.omdbfilmes.MainActivity
-import br.edu.ifsp.scl.omdbfilmes.Model.Teste
+import br.edu.ifsp.scl.omdbfilmes.Model.MovieOMDB
 import br.edu.ifsp.scl.omdbfilmes.R
 import br.edu.ifsp.scl.omdbfilmes.Retrofit.OmdbFilmes
 import br.edu.ifsp.scl.omdbfilmes.loadPicasso
-import kotlinx.android.synthetic.main.fragment_inicial.*
 import kotlinx.android.synthetic.main.fragment_inicial.view.*
-import org.jetbrains.anko.db.NULL
-import retrofit2.Call
-import retrofit2.Response
 
 class FragmentInicial : Fragment() {
 
@@ -27,15 +22,16 @@ class FragmentInicial : Fragment() {
         }
 
         omdbFilmes.callback = object : OmdbFilmes.MovieCallback {
-            override fun onResponse(obj: Teste) {
+            override fun onResponse(obj: MovieOMDB) {
                 val url = obj.poster
                 if(url != null) {
                     layoutView.ImageMovie.loadPicasso(url)
+                    layoutView.valotTituloTextView.setText(obj.title.toString())
+                    layoutView.valorAnoTextView.setText(obj.year.toString())
+                    layoutView.valorActorsTextView.setText(obj.actors.toString())
                 }
             }
         }
-
         return layoutView
     }
-
 }

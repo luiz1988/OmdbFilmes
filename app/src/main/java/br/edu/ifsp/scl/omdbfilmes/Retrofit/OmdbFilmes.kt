@@ -1,15 +1,10 @@
 package br.edu.ifsp.scl.omdbfilmes.Retrofit
 
-import android.support.v4.app.Fragment
-import android.view.View
-import android.widget.ImageView
 import br.edu.ifsp.scl.omdbfilmes.MainActivity
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.APP_KEY_FIELD
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.OMDB_API_KEY
 import br.edu.ifsp.scl.omdbfilmes.Model.Constantes.URL_BASE
-import br.edu.ifsp.scl.omdbfilmes.Model.Teste
-import br.edu.ifsp.scl.omdbfilmes.loadPicasso
-import com.squareup.picasso.Picasso
+import br.edu.ifsp.scl.omdbfilmes.Model.MovieOMDB
 import kotlinx.android.synthetic.main.frame_main.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -29,7 +24,6 @@ class OmdbFilmes(val mainActivity: MainActivity) {
     val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
 
     var callback: MovieCallback? = null
-
     // Instanciando o cliente HTTP
     init {
         // Adiciona um interceptador que é um objeto de uma classe anônima
@@ -65,32 +59,22 @@ class OmdbFilmes(val mainActivity: MainActivity) {
 
 
         omdbFilmesApi.getPopularFilme(titulo).enqueue(
-            object : Callback<Teste> {
-                override fun onFailure(call: Call<Teste>, t: Throwable) {
+            object : Callback<MovieOMDB> {
+                override fun onFailure(call: Call<MovieOMDB>, t: Throwable) {
                     mainActivity.mainLl.snackbar("Erro: " + t.message);
                 }
-
-                override fun onResponse(call: Call<Teste>, response: Response<Teste>) {
+                override fun onResponse(call: Call<MovieOMDB>, response: Response<MovieOMDB>) {
                     val body = response.body()
                     if (body != null) {
                         callback?.onResponse(body)
                     }
                 }
-
             } // Fim da classe anônima
         ) // Fim dos parâmetros de enqueue
     } // Fim da função traduzir
 
-    fun ImageView.loadPicasso(url: String) {
-        Picasso.get().load(url).into(this)
-    }
-
-
     interface MovieCallback {
-
-        fun onResponse(obj: Teste)
+        fun onResponse(obj: MovieOMDB)
     }
-
-
 }
 

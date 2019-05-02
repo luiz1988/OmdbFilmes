@@ -46,17 +46,87 @@
             android:layout_margin="10dp"
     />
 
-    <!--<TextView
-            android:id="@+id/result_test"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-    />-->
 
     <ImageView
             android:id="@+id/ImageMovie"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:scaleType="centerInside"
     />
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+        <TextView
+                android:id="@+id/tituloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Titulo: " />
+
+        <TextView
+                android:id="@+id/valotTituloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+        <TextView
+                android:id="@+id/anoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Ano: " />
+
+        <TextView
+                android:id="@+id/valorAnoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+        <TextView
+                android:id="@+id/actorsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Actors: " />
+
+        <TextView
+                android:id="@+id/valorActorsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="" />
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
