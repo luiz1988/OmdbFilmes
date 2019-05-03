@@ -51,7 +51,7 @@
             android:id="@+id/ImageMovie"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
     />
 
     <LinearLayout
@@ -114,15 +114,15 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Actors: " />
+                android:text="Atores: " />
 
         <TextView
                 android:id="@+id/valorActorsTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:lines="5"
                 android:text="" />
     </LinearLayout>
 

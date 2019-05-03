@@ -24,11 +24,14 @@ class FragmentInicial : Fragment() {
         omdbFilmes.callback = object : OmdbFilmes.MovieCallback {
             override fun onResponse(obj: MovieOMDB) {
                 val url = obj.poster
+
+
+
                 if(url != null) {
                     layoutView.ImageMovie.loadPicasso(url)
                     layoutView.valotTituloTextView.setText(obj.title.toString())
                     layoutView.valorAnoTextView.setText(obj.year.toString())
-                    layoutView.valorActorsTextView.setText(obj.actors.toString())
+                    layoutView.valorActorsTextView.setText(obj.actors?.replace(",", "\n".toString()))
                 }
             }
         }
