@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nome do Filme"
+                android:textColor="@color/colorAccent"
                 android:inputType="text"
                 android:textColorHint="@color/colorAccent"/>
     </android.support.design.widget.TextInputLayout>
