@@ -76,5 +76,10 @@ interface OmdbFilmesApi {
 
     @GET("/") //summary: Returns the most popular match for a given title
     fun getPopularFilme(@Query("t") titulo: String): Call<MovieOMDB>
+
+    @GET("/") //summary: Returns the most popular match for a given Id
+    fun getPopularFilmePorId(@Query("i") titulo: String): Call<MovieOMDB>
+
 // Outras funções de requisição poderiam ser colocadas aqui inclusive para outros métodos.
 }
+

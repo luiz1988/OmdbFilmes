@@ -63,6 +63,7 @@ class OmdbFilmes(val mainActivity: MainActivity) {
                 override fun onFailure(call: Call<MovieOMDB>, t: Throwable) {
                     mainActivity.mainLl.snackbar("Erro: " + t.message);
                 }
+
                 override fun onResponse(call: Call<MovieOMDB>, response: Response<MovieOMDB>) {
                     val body = response.body()
                     if (body != null) {
@@ -72,6 +73,29 @@ class OmdbFilmes(val mainActivity: MainActivity) {
             } // Fim da classe anônima
         ) // Fim dos parâmetros de enqueue
     } // Fim da função traduzir
+
+
+    fun pesquisarFilmePorId(id: String) {
+        /*Chama a função de requisição definida na Interface passando os parâmetros escolhidos pelo usuário e
+        enfileira a requisição que recebe um objeto de uma implementação anônima de Callback<ResponseBody>*/
+
+
+        omdbFilmesApi.getPopularFilmePorId(id).enqueue(
+            object : Callback<MovieOMDB> {
+                override fun onFailure(call: Call<MovieOMDB>, t: Throwable) {
+                    mainActivity.mainLl.snackbar("Erro: " + t.message);
+                }
+                override fun onResponse(call: Call<MovieOMDB>, response: Response<MovieOMDB>) {
+                    val body = response.body()
+                    if (body != null) {
+                        callback?.onResponse(body)
+                    }
+                }
+            } // Fim da classe anônima
+        ) // Fim dos parâmetros de enqueue
+    } // Fim da função traduzir
+
+
 
     interface MovieCallback {
         fun onResponse(obj: MovieOMDB)

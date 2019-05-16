@@ -37,9 +37,6 @@ class MainActivity : AppCompatActivity() {
         menuNavigationView.setNavigationItemSelectedListener { onNavigationItemSelected(it) }
 
         SetarFragment(FragmentInicial())
-
-       /* ImageView(this).loadPicasso("poster")*/
-
     }
 
     private fun onNavigationItemSelected(item: MenuItem): Boolean {
